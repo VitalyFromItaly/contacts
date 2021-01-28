@@ -1,13 +1,24 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
+import Info from '../components/Info.vue'
+import Contacts from '../components/Contacts.vue'
 Vue.use(Router);
 let router = new Router({
     mode: 'history',
-    routes: [{}],
-    //scrollBehavior() {
-    //    return { y: 0 }
-    //}
+    routes: [{
+            path: '',
+            name: 'contacts',
+            component: Contacts,
+            props: true
+        },
+        {
+            path: '/info/:lastName' + 'name',
+            name: 'info',
+            component: Info,
+            props: true,
+        }
+    ],
+
 })
 
 export default router;

@@ -3,7 +3,10 @@
     <VueHeader />
 
     <div class=" bg-gray-900 px-10 text-gray-100 flex-grow">
-      <Contacts class=""/>
+      <keep-alive>
+          <router-view>
+          </router-view>
+        </keep-alive>
     </div>
     <Vue-Footer />
   </div>
@@ -11,13 +14,11 @@
 
 <script>
 import VueHeader from "./VueHeader";
-import Contacts from "./Contacts";
 import VueFooter from "./VueFooter";
 export default {
   name: "wrapper",
   components: {
     VueHeader,
-    Contacts,
     VueFooter
   }
 };

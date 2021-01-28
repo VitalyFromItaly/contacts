@@ -11,7 +11,7 @@
         class="flex flex-col items-start rounded-xl overflow-hidden bg-gray-900 dark:bg-gray-50"
       >
         <div
-          class="flex items-center w-full p-4 bg-gray-800 dark:bg-gray-100"
+          class="flex items-center w-full py-4 px-5 bg-gray-800 dark:bg-gray-100"
         >
           <div
             class="dark:text-gray-900 text-gray-300  font-medium sm:text-sm md:text-xl"
@@ -34,12 +34,6 @@
         </div>
         <hr />
         <div class="ml-auto">
-          <button
-            @click="$emit('close')"
-            class=" mr-4 mb-4 focus:outline-none bg-gray-200 hover:bg-gray-500 text-gray-700 font-semibold hover:text-white py-2 px-4 border border-gray-500 hover:border-transparent rounded"
-          >
-            Add a contact
-          </button>
         </div>
       </div>
     </div>
