@@ -2,7 +2,7 @@
   <div id="wrapper" class="subpixel-antialiased flex flex-col min-h-screen">
     <VueHeader />
 
-    <div class=" bg-gray-900 px-10 text-gray-100 flex-grow">
+    <div class=" bg-gray-900 px-10 lg:px-40 text-gray-100 flex-grow">
       <keep-alive>
           <router-view>
           </router-view>
@@ -11,7 +11,6 @@
     <Vue-Footer />
   </div>
 </template>
-
 <script>
 import VueHeader from "./VueHeader";
 import VueFooter from "./VueFooter";
@@ -20,6 +19,6 @@ export default {
   components: {
     VueHeader,
     VueFooter
-  }
+  },
 };
 </script>

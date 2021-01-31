@@ -1,9 +1,10 @@
 <template>
   <div>
     <div class="flex items-end justify-between space-y-7 space-x-5">
-      <h1 @click="toInfo"
+      <h1
+        @click="toInfo"
         class="hover:bg-gray-700 py-2 px-3 rounded-lg pb-1 cursor-pointer border-b border-gray-100"
-      >{{contact.firstName}} {{contact.lastName}}</h1>
+      >{{contact.name}} {{contact.surname}}</h1>
       <button @click="deleteContact(contact)">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -23,13 +24,27 @@
 export default {
   name: "contact",
   props: ["contact"],
-  methods: {
-    deleteContact(value) {
-      this.$emit('removeContact',value)
-    },
-    toInfo() {
-      this.$router.push({name:'info', params: {name: this.contact.firstName, lastName:this.contact.lastName}})
+  data() {
+    return {
+      currentContact: null,
     }
   },
+  methods: {
+    deleteContact(value) {
+      this.$emit("removeContact", value);
+    },
+    toInfo() {
+      this.$router.push({
+        name: "info",
+        params: {
+          contact: this.contact, // to send the object to the Info.vue
+          id: this.contact.id,
+          //name: this.contact.firstName, // to show in url the name and last name
+          //lastName: this.contact.lastName == undefined ? '-last-name-not-specified' : this.contact.lastName //checking if last name is empty
+        },
+      });
+    }
+  },
+
 };
 </script>

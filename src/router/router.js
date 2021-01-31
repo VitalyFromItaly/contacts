@@ -12,7 +12,8 @@ let router = new Router({
             props: true
         },
         {
-            path: '/info/:lastName' + 'name',
+            path: '/info/:id',
+            //path: '/info/:id/:name:lastName',
             name: 'info',
             component: Info,
             props: true,

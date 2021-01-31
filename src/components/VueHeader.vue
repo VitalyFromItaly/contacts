@@ -1,6 +1,6 @@
 <template>
   <div id="vue-header">
-    <div class="bg-gray-700 px-10">
+    <div class="bg-gray-700 px-10 lg:px-40">
       <h1 class="text-gray-100 text-lg py-2 font-semibold tracking-wide">My Contacts</h1>
     </div>
   </div>

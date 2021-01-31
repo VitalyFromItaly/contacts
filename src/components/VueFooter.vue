@@ -1,7 +1,7 @@
 <template>
   <div id="vue-footer">
-  <div class="bg-gray-700 px-10">
-  Footer
+  <div class="bg-gray-700 text-gray-100 text-md py-2 font-bold px-10 lg:px-40">
+  made by Vitaly Perekutnev
   </div>
   </div>
 </template>
