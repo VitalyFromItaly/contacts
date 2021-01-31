@@ -37,10 +37,7 @@ export default {
       this.$router.push({
         name: "info",
         params: {
-          contact: this.contact, // to send the object to the Info.vue
           id: this.contact.id,
-          //name: this.contact.firstName, // to show in url the name and last name
-          //lastName: this.contact.lastName == undefined ? '-last-name-not-specified' : this.contact.lastName //checking if last name is empty
         },
       });
     }

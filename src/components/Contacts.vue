@@ -16,20 +16,20 @@
             <input
               class="pl-5 py-1 rounded-md ml-5 sm:w-4/5 mt-5 sm:mt-0 bg-gray-200"
               placeholder="add first name"
-              v-model="newContact.firstName"
+              v-model="newContact.name"
               id="firstName"
             />
             <label class="text-yellow-300 block pl-5 pt-2" v-if="isContactEmpty" for="firstName">The field is required.</label>
             <input
               class="pl-5 py-1 rounded-md ml-5 sm:w-4/5 mt-5 bg-gray-200"
               placeholder="add last name"
-              v-model="newContact.lastName"
+              v-model="newContact.surname"
               name="lastName"
             />
             <input
               class="pl-5 py-1 rounded-md ml-5 sm:w-4/5 mt-5 bg-gray-200"
               placeholder="add phone number"
-              v-model="newContact.phoneNumber"
+              v-model="newContact.phone"
               name="phone"
             />
           </div>
@@ -99,7 +99,7 @@ export default {
     isContactEmpty() {
       // to prevent of pushing of an empty contact
       //if (Object.keys(this.newContact).length == 0)
-      if (this.newContact.firstName == undefined || this.newContact.firstName =='')
+      if (this.newContact.name == undefined || this.newContact.name =='')
        {
         return true;
       } else {

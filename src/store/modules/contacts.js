@@ -49,21 +49,36 @@ export default {
         RENAME_KEY_IN_CURRENT_CONTACT(state, payload) {
             let values = Object.values(state.currentContactInInfo)
             let keys = Object.keys(state.currentContactInInfo);
+            console.log(payload.keyNew);
             let newKeys = keys.map(key => {
                 if (key == payload.keyOld) {
                     return key = payload.keyNew
                 } else {
                     return key
                 }
-            })
+            });
+            let newValues = values.map(key => {
+                if (key == payload.valueOld) {
+                    return key = payload.valueNew
+                } else {
+                    return key
+                }
+            });
             state.currentContactInInfo = Object.assign(...newKeys.map((n, i) => ({
-                [n]: values[i]
+                [n]: newValues[i]
             })))
+
+        },
+        UPDATE_CONTACTS(state) {
             let index = state.contacts.findIndex(index => index.id == state.currentContactInInfo.id)
             state.contacts.splice(index, 1, state.currentContactInInfo) // update state.contacts after changing a key in currentContact
         },
-
-
+        ADD_NEW_FILED_TO_CONTACT(state, payload) {
+            state.currentContactInInfo[payload.newKey] = payload.newValue
+        },
+        DELETE_KEY_IN_CURRENT_CONTACT(state, payload) {
+            delete state.currentContactInInfo[payload.deletingKey];
+        }
     },
     actions: {
         DEFINE_NEW_CONTACT(context, value) {
@@ -75,8 +90,17 @@ export default {
         DEFINE_CURRENT_CONTACT(context, value) {
             context.commit('SET_CURRENT_CONTACT', value)
         },
-        DEFINE_NEW_KEY_IN_CURRENT_CONTACT(context, payload) {
-            context.commit('RENAME_KEY_IN_CURRENT_CONTACT', payload);
+        async DEFINE_NEW_KEY_IN_CURRENT_CONTACT(context, payload) {
+            await context.commit('RENAME_KEY_IN_CURRENT_CONTACT', payload);
+            context.commit('UPDATE_CONTACTS')
+        },
+        async DEFINE_NEW_FILED_TO_CONTACT(context, payload) {
+            await context.commit('ADD_NEW_FILED_TO_CONTACT', payload);
+            context.commit('UPDATE_CONTACTS')
+        },
+        DEFINE_DELETING_KEY(context, payload) {
+            context.commit('DELETE_KEY_IN_CURRENT_CONTACT', payload);
+
         }
     }
 }
