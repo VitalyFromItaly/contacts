@@ -21,17 +21,16 @@
   </div>
 </template>
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "contact",
   props: ["contact"],
-  data() {
-    return {
-      currentContact: null,
-    }
-  },
   methods: {
+    ...mapActions(['DEFINE_DELETING_CONTACT']),
     deleteContact(value) {
-      this.$emit("removeContact", value);
+      if (confirm("Are you sure you want to delete the contact?")) {
+        this.DEFINE_DELETING_CONTACT(value);
+      }
     },
     toInfo() {
       this.$router.push({
@@ -42,6 +41,5 @@ export default {
       });
     }
   },
-
 };
 </script>

@@ -5,13 +5,13 @@
       class=" fixed inset-0 w-full h-full bg-gray-800 bg-opacity-80"
     ></button>
     <div
-      class="dark:text-gray-600 z-10 absolute top-0 text-gray-400 w-5/6 md:w-2/3 lg:w-1/2"
+      class="dark:text-gray-600 z-10 absolute top-10 text-gray-400 w-5/6 sm:w-2/3 lg:w-1/2"
     >
       <div
         class="flex flex-col items-start rounded-xl overflow-hidden bg-gray-900 dark:bg-gray-50"
       >
         <div
-          class="flex items-center w-full py-4 px-5 bg-gray-800 dark:bg-gray-100"
+          class="flex items-center w-full py-1 md:py-4 px-5 bg-gray-800 dark:bg-gray-100"
         >
           <div
             class="dark:text-gray-900 text-gray-300  font-medium sm:text-sm md:text-xl"

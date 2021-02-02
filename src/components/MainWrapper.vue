@@ -3,10 +3,10 @@
     <VueHeader />
 
     <div class=" bg-gray-900 px-10 lg:px-40 text-gray-100 flex-grow">
-      <keep-alive>
+      <!--<keep-alive>-->
           <router-view>
           </router-view>
-        </keep-alive>
+        <!--</keep-alive>-->
     </div>
     <Vue-Footer />
   </div>

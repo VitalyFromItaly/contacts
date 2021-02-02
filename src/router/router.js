@@ -13,13 +13,10 @@ let router = new Router({
         },
         {
             path: '/info/:id',
-            //path: '/info/:id/:name:lastName',
             name: 'info',
             component: Info,
             props: true,
         }
     ],
-
 })
-
 export default router;

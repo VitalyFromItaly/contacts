@@ -4,6 +4,6 @@ import contacts from './modules/contacts'
 Vue.use(Vuex);
 export const store = new Vuex.Store({
     modules: {
-        contacts
+        contacts,
     }
 });
