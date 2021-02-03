@@ -62,9 +62,12 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['GET_CONTACT_BY_ID','GET_ACTION_HAPPENED_STATE','GET_ID']),
+    ...mapGetters(['GET_CONTACT_BY_ID','GET_ACTION_HAPPENED_STATE','GET_ID','GET_INDEX_BY_ID']),
     current() {
       return this.GET_CONTACT_BY_ID(this.$route.params.id)
+    },
+    currentIndex() {
+      return this.GET_INDEX_BY_ID(this.current.id)
     },
     id() {
       return this.GET_ID

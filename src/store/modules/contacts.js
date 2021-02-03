@@ -26,7 +26,7 @@ export default {
             }
         ],
         prevState: null,
-        isActionHappened: false
+        isActionHappened: false,
     },
     getters: {
         //GET_PREV_ID(state) {
@@ -37,6 +37,11 @@ export default {
         },
         GET_CONTACT_BY_ID(state) {
             return id => state.contacts.find(item => {
+                return item.id == id
+            })
+        },
+        GET_INDEX_BY_ID(state) {
+            return id => state.contacts.findIndex(item => {
                 return item.id == id
             })
         },
@@ -52,22 +57,20 @@ export default {
         REMOVE_CONTACT(state, value) {
             state.contacts = state.contacts.filter(e => e.id !== value.id);
         },
-        RENAME_KEY_IN_CURRENT_CONTACT(state, payload) {
+        RENAME_KEY_IN_CURRENT_CONTACT(state, payload, ) {
+            //console.log(getters.GET_INDEX_BY_ID);
+            let index = state.contacts.findIndex(index => index.id === payload.id)
+            console.log(index);
             let newKeyAndValue = state.contacts.find(item => item.id == payload.id);
             console.log(newKeyAndValue);
-            console.log(state.contacts[0])
             if (payload.keyOld !== payload.keyNew) {
                 Object.defineProperty(newKeyAndValue, payload.keyNew,
                     Object.getOwnPropertyDescriptor(newKeyAndValue, payload.keyOld));
                 delete newKeyAndValue[payload.keyOld]
             }
-            console.log(state.contacts[0])
             newKeyAndValue[payload.keyNew] = payload.valueNew;
-            console.log(state.contacts[0])
-            state.contacts.splice(payload.id, 1, newKeyAndValue); // there is a bug instead of payload.id should be index of item
-            console.log(state.contacts[0])
+            state.contacts.splice(index, 1, newKeyAndValue); // there is a bug instead of payload.id should be index of item
             state.isActionHappened = true;
-            console.log(state.contacts[0])
         },
         ADD_NEW_FILED_TO_CONTACT(state, payload) {
             let newField = state.contacts.find(item => item.id == payload.id)
@@ -81,7 +84,6 @@ export default {
             state.isActionHappened = true;
         },
         SAVE_PREV_STATE(state, payload) {
-            console.log(payload.id);
             //let index = state.contacts.findIndex(index => index.id == id)
             state.prevState = Object.assign({}, state.contacts.find(item => item.id == payload.id));
             //state.prevState = JSON.parse(JSON.stringify(state.contacts[payload.id]))
