@@ -1,10 +1,11 @@
 <template>
-  <div id="contacts" class="mb-auto">
+  <div id="contacts" class="mb-auto" @keydown.esc="isModalOpenContact = false">
     <!--the modal window for adding a new contact -->
     <Modal
       @close="isModalOpenContact = !isModalOpenContact"
       v-if="isModalOpenContact"
-      class="flex items-center justify-center">
+      class="flex items-center justify-center"
+    >
       <!-- to center the modal-->
       <template v-slot:header>Add a new contact</template>
       <template v-slot:body>
@@ -54,11 +55,16 @@
     <div class="py-10">
       <div class="flex items-baseline justify-between">
         <div>
-          <Contact v-for="contact in contacts" :key="contact.id" :contact="contact"/>
+          <Contact
+            v-for="contact in contacts"
+            :key="contact.id"
+            :contact="contact"
+          />
         </div>
         <button
           @click.prevent="isModalOpenContact = !isModalOpenContact"
-          class="text-3xl hover:bg-gray-700 px-1 rounded-md">
+          class="text-3xl hover:bg-gray-700 px-1 rounded-md"
+        >
           +
         </button>
       </div>
@@ -103,12 +109,6 @@ export default {
     },
     contacts() {
       return this.GET_ALL_CONTACTS;
-    },
-
-  },
-  watch: {
-    contacts: function () {
-      if (this.$route.name !== "contacts") return this.GET_ALL_CONTACTS;
     },
   },
 };

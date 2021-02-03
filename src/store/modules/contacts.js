@@ -29,9 +29,13 @@ export default {
         isActionHappened: false,
     },
     getters: {
-        //GET_PREV_ID(state) {
-        //    return state.prevState.id
-        //},
+        GET_PREV(state) {
+            if (state.prevState !== null) {
+                return state.prevState
+            } else {
+                return null
+            }
+        },
         GET_ALL_CONTACTS(state) {
             return state.contacts;
         },
@@ -57,36 +61,32 @@ export default {
         REMOVE_CONTACT(state, value) {
             state.contacts = state.contacts.filter(e => e.id !== value.id);
         },
-        RENAME_KEY_IN_CURRENT_CONTACT(state, payload, ) {
-            //console.log(getters.GET_INDEX_BY_ID);
-            let index = state.contacts.findIndex(index => index.id === payload.id)
-            console.log(index);
+        RENAME_KEY_IN_CURRENT_CONTACT(state, payload) {
             let newKeyAndValue = state.contacts.find(item => item.id == payload.id);
-            console.log(newKeyAndValue);
             if (payload.keyOld !== payload.keyNew) {
                 Object.defineProperty(newKeyAndValue, payload.keyNew,
                     Object.getOwnPropertyDescriptor(newKeyAndValue, payload.keyOld));
                 delete newKeyAndValue[payload.keyOld]
             }
             newKeyAndValue[payload.keyNew] = payload.valueNew;
-            state.contacts.splice(index, 1, newKeyAndValue); // there is a bug instead of payload.id should be index of item
+            state.contacts.splice(payload.index, 1, newKeyAndValue);
             state.isActionHappened = true;
         },
         ADD_NEW_FILED_TO_CONTACT(state, payload) {
             let newField = state.contacts.find(item => item.id == payload.id)
             newField[payload.newKey] = payload.newValue;
+            state.contacts.splice(payload.index, 1, newField);
             state.isActionHappened = true;
         },
         DELETE_KEY_IN_CURRENT_CONTACT(state, payload) {
             let deleteKey = state.contacts.find(item => item.id == payload.id)
             delete deleteKey[payload.deletingKey]
-            state.contacts.splice(payload.id, 1, deleteKey);
+            state.contacts.splice(payload.index, 1, deleteKey);
             state.isActionHappened = true;
         },
         SAVE_PREV_STATE(state, payload) {
-            //let index = state.contacts.findIndex(index => index.id == id)
             state.prevState = Object.assign({}, state.contacts.find(item => item.id == payload.id));
-            //state.prevState = JSON.parse(JSON.stringify(state.contacts[payload.id]))
+            state.prevState.index = payload.index
         },
         CANCEL_ACTION(state, id) {
             state.contacts.splice(id, 1, state.prevState)
@@ -100,16 +100,16 @@ export default {
         DEFINE_DELETING_CONTACT(context, value) {
             context.commit('REMOVE_CONTACT', value);
         },
-        async DEFINE_CHANGING_KEY_IN_CURRENT_CONTACT(context, payload) {
-            await context.commit('SAVE_PREV_STATE', payload);
+        DEFINE_CHANGING_KEY_IN_CURRENT_CONTACT(context, payload) {
+            context.commit('SAVE_PREV_STATE', payload);
             context.commit('RENAME_KEY_IN_CURRENT_CONTACT', payload);
         },
-        async DEFINE_NEW_FILED_TO_CONTACT(context, payload) {
-            await context.commit('SAVE_PREV_STATE', payload);
+        DEFINE_NEW_FILED_TO_CONTACT(context, payload) {
+            context.commit('SAVE_PREV_STATE', payload);
             context.commit('ADD_NEW_FILED_TO_CONTACT', payload);
         },
-        async DEFINE_DELETING_KEY(context, payload) {
-            await context.commit('SAVE_PREV_STATE', payload);
+        DEFINE_DELETING_KEY(context, payload) {
+            context.commit('SAVE_PREV_STATE', payload);
             context.commit('DELETE_KEY_IN_CURRENT_CONTACT', payload);
         },
         CANCEL_PREV_ACTION(context, id) {

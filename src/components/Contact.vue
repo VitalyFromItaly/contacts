@@ -4,7 +4,9 @@
       <h1
         @click="toInfo"
         class="hover:bg-gray-700 py-2 px-3 rounded-lg pb-1 cursor-pointer border-b border-gray-100"
-      >{{contact.name}} {{contact.surname}}</h1>
+      >
+        {{ contact.name }} {{ contact.surname }}
+      </h1>
       <button @click="deleteContact(contact)">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -26,7 +28,7 @@ export default {
   name: "contact",
   props: ["contact"],
   methods: {
-    ...mapActions(['DEFINE_DELETING_CONTACT']),
+    ...mapActions(["DEFINE_DELETING_CONTACT"]),
     deleteContact(value) {
       if (confirm("Are you sure you want to delete the contact?")) {
         this.DEFINE_DELETING_CONTACT(value);
@@ -39,7 +41,7 @@ export default {
           id: this.contact.id,
         },
       });
-    }
+    },
   },
 };
 </script>
