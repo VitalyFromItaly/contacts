@@ -1,7 +1,7 @@
 <template>
 <div id="modal" class="relative">
   <button @click="$emit('close')" class="fixed inset-0 w-full h-100 bg-gray-800 bg-opacity-80"></button>
-  <div class="z-10 absolute top-0 text-gray-400 w-5/6 sm:w-2/3 lg:w-1/2 overflow-y-auto" :class="{}">
+  <div class="z-10 absolute top-0 text-gray-400 w-5/6 sm:w-2/3 lg:w-1/2 overflow-y-auto">
     <div class="flex flex-col items-start rounded-xl overflow-hidden bg-gray-900 ">
       <div class="flex items-center w-full py-1 md:py-4 px-5 bg-gray-800 ">
         <div class="  text-gray-300  font-medium sm:text-sm md:text-xl">
